@@ -1,7 +1,7 @@
 const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
-const showChat = document.querySelector("#showChat");
+// const showChat = document.querySelector("#showChat");
 const backBtn = document.querySelector(".header__back");
 myVideo.muted = true;
 
@@ -11,13 +11,13 @@ backBtn.addEventListener("click", () => {
   document.querySelector(".main__right").style.display = "none";
   document.querySelector(".header__back").style.display = "none";
 });
-
-showChat.addEventListener("click", () => {
-  document.querySelector(".main__right").style.display = "flex";
-  document.querySelector(".main__right").style.flex = "1";
-  document.querySelector(".main__left").style.display = "none";
-  document.querySelector(".header__back").style.display = "block";
-});
+var currentPeer=null;
+// showChat.addEventListener("click", () => {
+//   document.querySelector(".main__right").style.display = "flex";
+//   document.querySelector(".main__right").style.flex = "1";
+//   document.querySelector(".main__left").style.display = "none";
+//   document.querySelector(".header__back").style.display = "block";
+// });
 
 const user = prompt("Enter your name");
 
@@ -69,6 +69,7 @@ navigator.mediaDevices
       call.on("stream", (userVideoStream) => {
         addVideoStream(video, userVideoStream);
       });
+      currentPeer=call;
     });
 
     socket.on("user-connected", (userId) => {
@@ -97,7 +98,60 @@ const addVideoStream = (video, stream) => {
     videoGrid.append(video);
   });
 };
+// const shareScreenButton = document.getElementById('share-screen');
+//   let screenStream = null;
+//   let screenShared = false;
 
+//   shareScreenButton.addEventListener('click', () => {
+//     if (!screenShared) {
+//       navigator.mediaDevices.getDisplayMedia({ video:{
+//         cursor: "always"
+//       },
+//       audio: {
+//         echoCancellation: true,
+//         noiseSuppression: true
+//       }
+//      })
+//         .then(screenMediaStream => {
+//           screenStream = screenMediaStream;
+//           const videoTrack = screenMediaStream.getVideoTracks()[0];
+//           const sender = currentPeer.peerConnection.getSenders().find(sender => sender.track.kind === videoTrack.kind);
+//           console.log(sender);
+//           sender.replaceTrack(videoTrack);
+
+//           // const screenVideo = document.createElement('video');
+//           // addVideoStream(screenVideo, screenMediaStream);
+
+//           screenShared = true;
+//           shareScreenButton.innerHTML = 'Stop Sharing';
+
+//           // When screen sharing is stopped
+//           screenMediaStream.getVideoTracks()[0].addEventListener('ended', () => {
+//             stopScreenSharing();
+//           });
+//         })
+//         .catch(error => {
+//           console.error('Error accessing screen media:', error);
+//         });
+//     } else {
+//       stopScreenSharing();
+//     }
+//   });
+
+//   // Stop screen sharing
+//   function stopScreenSharing() {
+//     const videoTrack = myVideoStream.getVideoTracks()[0];
+//     const sender = peer.getSenders().find(sender => sender.track.kind === 'video');
+//     sender.replaceTrack(videoTrack);
+
+//     if (screenStream) {
+//       screenStream.getTracks().forEach(track => track.stop());
+//       screenStream = null;
+//     }
+
+//     screenShared = false;
+//     shareScreenButton.innerHTML = 'Share Screen';
+//   }
 let text = document.querySelector("#chat_message");
 let send = document.getElementById("send");
 let messages = document.querySelector(".messages");

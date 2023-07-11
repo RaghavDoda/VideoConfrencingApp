@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 :root {
-  --main-darklg: #1d2635;
-  --main-dark: #161d29;
-  --primary-color: #2f80ec;
-  --main-light: #eeeeee;
+  --main-darklg: #a93c5b;
+  --main-dark: #f4dfe6;
+  /* --primary-color: #2f80ec; */
+  --main-light: #ffffff;
+  /* --main-darklg: #ffffff;
+  --main-dark: #ffffff;
+  --primary-color: #ffffff;
+  --main-light: #ffffff; */
   font-family: "Poppins", sans-serif;
 }
 
@@ -17,19 +21,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 8vh;
-  position: relative;
+  height: 6vh;
+  position: fixed;
   width: 100%;
   background-color: var(--main-darklg);
 }
 
-.logo > h3 {
+.header > h3 {
   color: var(--main-light);
 }
 
 .main {
-  overflow: hidden;
-  height: 92vh;
+  overflow:auto;
+  height: 86vh;
+  padding-top: 6vh;
   display: flex;
 }
 
@@ -60,17 +65,22 @@ video {
 }
 
 .options {
-  padding: 1rem;
+  /* padding: 1rem; */
   display: flex;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 100rem;
   background-color: var(--main-darklg);
 }
 
 .options__left {
   display: flex;
+  
 }
 
 .options__right {
   margin-left: auto;
+  margin-right: 30px;
 }
 
 .options__button {
@@ -94,9 +104,12 @@ video {
   display: flex;
   flex-direction: column;
   flex: 0.3;
-  background-color: #242f41;
+  background-color: #934e6f;
 }
-
+.chatWord > h4{
+  color: white;
+  padding: 4px;
+}
 .main__chat_window {
   flex-grow: 1;
   overflow-y: scroll;
@@ -158,9 +171,6 @@ video {
   flex-wrap: wrap;
 }
 
-#showChat {
-  display: none;
-}
 
 .header__back {
   display: none;
